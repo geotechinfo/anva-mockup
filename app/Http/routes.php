@@ -14,3 +14,13 @@
 $app->get('/', function () use ($app) {
     return $app->version();
 });
+
+$app->group(
+    ['prefix' => 'mockup/api/v1',
+    'namespace' => 'App\Http\Controllers'],
+    function ($app)
+    {
+
+        $app->get('product', ['uses' => 'ProductController@index']);
+    }
+);
