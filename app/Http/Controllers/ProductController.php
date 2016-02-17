@@ -2,30 +2,34 @@
 namespace App\Http\Controllers;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
-use App\Services\ProductStorage;
+use App\Services\ElasticStorage;
 use Illuminate\Http\Request;
-use Symfony\Component\Config\Definition\Exception\Exception;
 
 class ProductController extends BaseController
 {
-    const PRODUCTSTORAGE_TYPE = 'product';
-    private $productStorage;
+    const STORAGE_TYPE = 'product';
+    private $elasticStorage;
 
     /**
      * Construct
-     * @param ProductStorage $productStorage
+     * @param ElasticStorage $elasticStorage
      */
-    public function __construct(ProductStorage $productStorage)
+    public function __construct(ElasticStorage $elasticStorage)
     {
-        $this->productStorage = $productStorage;
-        $this->productStorage->setType(self::PRODUCTSTORAGE_TYPE);
+        $this->elasticStorage = $elasticStorage;
+        $this->elasticStorage->setType(self::STORAGE_TYPE);
     }
 
     public function index(Request $request)
     {
+        return "Please use product/list(GET) or product/search(POST) request!";
+    }
+    
+    public function lists(Request $request)
+    {
         $searchParams = array();
         try {
-            $result = $this->productStorage->search($searchParams);
+            $result = $this->elasticStorage->lists();
             $tasks = $result['hits']['hits'];
 
             $response = [];

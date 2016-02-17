@@ -13,6 +13,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\Services\ProductStorage', 'App\Services\ElasticProductStorage');
+        $this->app->bind('App\Services\ElasticStorageInterface', 'App\Services\ElasticStorage');
     }
 }

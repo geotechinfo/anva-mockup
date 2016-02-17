@@ -20,7 +20,8 @@ $app->group(
     'namespace' => 'App\Http\Controllers'],
     function ($app)
     {
-
         $app->get('product', ['uses' => 'ProductController@index']);
+        $app->get('product/list', ['uses' => 'ProductController@lists']);
+        $app->post('product/search', ['uses' => 'ProductController@search']);
     }
 );
