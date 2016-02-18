@@ -30,13 +30,17 @@ class ElasticStorage implements ElasticStorageInterface
      * Get item list
      * @param $searchBody
      * @return mixed
-     */
-    public function lists($from=0, $size=10, $search=array())
+     */    
+    public function lists($search=array(), $sort=array("id"=>"desc"), $from=0, $size=50)
     {
         $params['index'] = $this->index;
         $params['from']  = $from;
-        $params['size']  = $size;
-        $params['body']  = $search;
+        $params['size']  = $size;        
+        $params['body']  = array();
+        
+        $params['body'] = (count($search)>0) ? array_merge($params['body'], $search) : $params['body'];
+        $params['body'] = array_merge($params['body'], array("sort"=>$sort));
+
         return $this->client->search($params);
     }
 }

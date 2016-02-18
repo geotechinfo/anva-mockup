@@ -17,5 +17,5 @@ interface ElasticStorageInterface
      * @param $searchBody
      * @return mixed
      */
-    public function lists($from=0, $size=10, $search=array());
+    public function lists();
 }
