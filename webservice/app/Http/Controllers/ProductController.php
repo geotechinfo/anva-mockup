@@ -37,7 +37,7 @@ class ProductController extends BaseController
             }
             return $this->listResponse($response);
         } catch (\Exception $e) {
-            return $this->errorResponse();
+            return $this->errorResponse("Something went wrong!");
         }
     }
     
